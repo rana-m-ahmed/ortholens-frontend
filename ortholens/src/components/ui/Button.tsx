@@ -82,8 +82,3 @@ export default function Button({
     </motion.button>
   )
 }
-// TODO: Prompt 3
-
-export default function Button() {
-  return null
-}

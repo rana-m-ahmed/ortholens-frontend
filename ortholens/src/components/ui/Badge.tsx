@@ -58,8 +58,3 @@ export default function Badge({ label, variant, size = 'sm', className }: Props)
     </span>
   )
 }
-// TODO: Prompt 3
-
-export default function Badge() {
-  return null
-}

@@ -51,8 +51,3 @@ export default function StatusDot({ status, label, className }: Props) {
     </div>
   )
 }
-// TODO: Prompt 3
-
-export default function StatusDot() {
-  return null
-}

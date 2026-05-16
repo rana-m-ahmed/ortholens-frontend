@@ -27,8 +27,3 @@ export default function Spinner({ size = 'md', className }: Props) {
     />
   )
 }
-// TODO: Prompt 3
-
-export default function Spinner() {
-  return null
-}
