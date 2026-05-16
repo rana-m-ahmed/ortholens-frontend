@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --color-bg-base:     #060B14;
+  --color-bg-surface:  #0D1421;
+  --color-bg-elevated: #131F33;
+  --color-border-dim:  rgba(0,229,255,0.10);
+  --color-border-soft: rgba(0,229,255,0.22);
+  --color-border-bright: rgba(0,229,255,0.45);
+  --color-accent:      #00E5FF;
+  --color-accent-dim:  rgba(0,229,255,0.08);
+  --color-fracture:    #FF3860;
+  --color-fracture-dim:rgba(255,56,96,0.10);
+  --color-normal:      #00D68F;
+  --color-normal-dim:  rgba(0,214,143,0.10);
+  --color-warning:     #FFB84D;
+  --color-text-primary:  #F0F6FF;
+  --color-text-secondary:rgba(176,196,222,0.70);
+  --color-text-muted:    rgba(176,196,222,0.40);
+}
+
+/* Reusable utility classes — reference these by name in all components */
+.glass {
+  background: rgba(13,20,33,0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--color-border-dim);
+  border-radius: 12px;
+}
+.glass-bright {
+  background: rgba(13,20,33,0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 12px;
+}
+/* Subtle CRT/DICOM-viewer horizontal lines */
+.scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,229,255,0.018) 2px,
+    rgba(0,229,255,0.018) 4px
+  );
+  pointer-events: none;
+}
+/* Monospace label style used for metadata rows */
+.mono-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.mono-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-accent);
+}
+/* Glow ring animation helper used on status dots */
+@keyframes status-ping {
+  75%, 100% { transform: scale(1.8); opacity: 0; }
+}
+
+body { @apply bg-bg-base text-text-primary font-sans antialiased min-h-screen }
