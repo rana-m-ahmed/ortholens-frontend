@@ -1,8 +1,3 @@
-// TODO: Prompt 2
-
-export function noop() {
-  return undefined
-}
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import type { PredictionClass, ConfidenceLevel, DiagnosticColors } from '@/types'
@@ -58,7 +53,7 @@ export function formatDuration(ms: number): string {
  * Returns a discriminated union with `valid: true` or `valid: false` and a reason.
  */
 export function validateFile(file: File): { valid: true } | { valid: false; reason: string } {
-  if (!ACCEPTED_MIME_TYPES.includes(file.type as any)) {
+  if (!ACCEPTED_MIME_TYPES.some((type) => type === file.type)) {
     return { valid: false, reason: 'Unsupported file type. Please upload a JPEG, PNG, or WebP image.' }
   }
   if (file.size > MAX_FILE_SIZE_BYTES) {
@@ -107,16 +102,4 @@ export function base64ToDataUrl(base64: string): string {
   const trimmed = base64.trim()
   if (trimmed.startsWith('data:')) return trimmed
   return `data:image/png;base64,${trimmed}`
-}
-
-export default {
-  cn,
-  clamp,
-  formatConfidence,
-  formatFileSize,
-  formatDuration,
-  validateFile,
-  getConfidenceLevel,
-  getDiagnosticColors,
-  base64ToDataUrl,
 }

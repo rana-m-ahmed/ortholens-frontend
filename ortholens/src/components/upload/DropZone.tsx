@@ -125,6 +125,7 @@ export default function DropZone({ onFileSelect, disabled = false, preview = nul
             >
               <div className="relative" style={{ padding: 12 }}>
                 {preview ? (
+                  // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={preview.objectUrl}
                     alt="X-ray preview"

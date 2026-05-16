@@ -1,5 +1,14 @@
-// TODO: Prompt 10
+'use client'
 
-export default function Error() {
-  return null
+type ErrorPageProps = {
+  error: Error & { digest?: string }
+  reset: () => void
+}
+
+export default function Error({ error }: ErrorPageProps) {
+  return (
+    <div role="alert" style={{ padding: 24, color: 'var(--color-text-secondary)' }}>
+      {error.message}
+    </div>
+  )
 }

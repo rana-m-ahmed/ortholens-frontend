@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
   --color-bg-base:     #060B14;
@@ -67,5 +67,3 @@
 @keyframes status-ping {
   75%, 100% { transform: scale(1.8); opacity: 0; }
 }
-
-body { @apply bg-bg-base text-text-primary font-sans antialiased min-h-screen }
