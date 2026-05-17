@@ -201,24 +201,230 @@ export default function HeatmapViewer({ originalUrl, heatmapBase64 }: Props) {
   const heatmapUrl = base64ToDataUrl(heatmapBase64)
 
   return (
-    <div className="flex flex-col gap-3">
-      <ViewerHeader mode={mode} onModeChange={setMode} />
+    <div style={{
+      border: '1px solid rgba(255,255,255,0.08)',
+      borderRadius: '10px',
+      overflow: 'hidden',
+      background: 'var(--bg-surface, #0D1421)',
+    }}>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '12px 16px',
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
+      }}>
+        <span style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: '10px',
+          letterSpacing: '0.12em',
+          textTransform: 'uppercase',
+          color: 'rgba(255,255,255,0.35)',
+        }}>
+          Grad-CAM Analysis
+        </span>
 
-      <LayoutGroup>
-        <AnimatePresence mode="wait" initial={false}>
-          {mode === 'sidebyside' ? (
-            <SideBySideView key="sidebyside" originalUrl={originalUrl} heatmapUrl={heatmapUrl} />
-          ) : (
-            <BlendView
-              key="blend"
-              originalUrl={originalUrl}
-              heatmapUrl={heatmapUrl}
-              blendOpacity={blendOpacity}
-              setBlendOpacity={setBlendOpacity}
+        <div style={{
+          display: 'flex',
+          background: 'rgba(255,255,255,0.05)',
+          borderRadius: '6px',
+          padding: '3px',
+          gap: '2px',
+        }}>
+          {(['sidebyside', 'blend'] as const).map((m) => (
+            <button
+              key={m}
+              onClick={() => setMode(m)}
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '11px',
+                letterSpacing: '0.04em',
+                padding: '5px 12px',
+                borderRadius: '4px',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background 0.2s, color 0.2s',
+                background: mode === m ? 'rgba(255,255,255,0.10)' : 'transparent',
+                color: mode === m ? 'var(--color-accent, #00E5FF)' : 'rgba(255,255,255,0.35)',
+              }}
+            >
+              {m === 'sidebyside' ? 'Side by side' : 'Blend compare'}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {mode === 'sidebyside' ? (
+        <div className="heatmap-grid" style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '1px',
+          background: 'rgba(255,255,255,0.06)',
+        }}>
+          <div style={{ background: 'var(--bg-surface, #0D1421)', padding: '12px' }}>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '10px',
+            }}>
+              <span style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '10px',
+                letterSpacing: '0.10em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.35)',
+              }}>Original X-Ray</span>
+              <span style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '9px',
+                padding: '2px 7px',
+                borderRadius: '3px',
+                background: 'rgba(255,255,255,0.06)',
+                color: 'rgba(255,255,255,0.35)',
+                letterSpacing: '0.08em',
+              }}>RAW</span>
+            </div>
+            <div style={{
+              background: '#060B14',
+              borderRadius: '6px',
+              overflow: 'hidden',
+              width: '100%',
+              aspectRatio: '4/3',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <img
+                src={originalUrl}
+                alt="Original X-ray"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </div>
+
+          <div style={{ background: 'var(--bg-surface, #0D1421)', padding: '12px' }}>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '10px',
+            }}>
+              <span style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '10px',
+                letterSpacing: '0.10em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.35)',
+              }}>Grad-CAM Overlay</span>
+              <span style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '9px',
+                padding: '2px 7px',
+                borderRadius: '3px',
+                background: 'rgba(0,229,255,0.08)',
+                color: 'var(--color-accent, #00E5FF)',
+                border: '1px solid rgba(0,229,255,0.18)',
+                letterSpacing: '0.08em',
+              }}>AI</span>
+            </div>
+            <div style={{
+              background: '#060B14',
+              borderRadius: '6px',
+              overflow: 'hidden',
+              width: '100%',
+              aspectRatio: '4/3',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <img
+                src={heatmapUrl}
+                alt="Grad-CAM heatmap"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div style={{ padding: '12px' }}>
+          <div style={{
+            background: '#060B14',
+            borderRadius: '6px',
+            overflow: 'hidden',
+            width: '100%',
+            aspectRatio: '4/3',
+            position: 'relative',
+          }}>
+            <img
+              src={originalUrl}
+              alt="Original X-ray"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+              }}
             />
-          )}
-        </AnimatePresence>
-      </LayoutGroup>
+            <img
+              src={heatmapUrl}
+              alt="Heatmap overlay"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                opacity: blendOpacity / 100,
+              }}
+            />
+          </div>
+
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            marginTop: '12px',
+            padding: '0 4px',
+          }}>
+            <span style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '10px',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: 'rgba(255,255,255,0.35)',
+              flexShrink: 0,
+            }}>Heatmap opacity</span>
+            <input
+              type="range"
+              min={0}
+              max={100}
+              step={1}
+              value={blendOpacity}
+              onChange={(e) => setBlendOpacity(Number(e.target.value))}
+              style={{ flex: 1, accentColor: 'var(--color-accent, #00E5FF)' }}
+            />
+            <span style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '12px',
+              color: 'var(--color-text-primary)',
+              minWidth: '38px',
+              textAlign: 'right',
+            }}>{blendOpacity}%</span>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

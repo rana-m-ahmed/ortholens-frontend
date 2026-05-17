@@ -109,3 +109,71 @@ body {
     opacity: 1;
   }
 }
+
+/* ── Metrics grid responsive ── */
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .metadata-panel {
+    grid-column: 1 / -1 !important;
+  }
+}
+@media (max-width: 480px) {
+  .metrics-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Heatmap viewer responsive ── */
+@media (max-width: 580px) {
+  .heatmap-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Global number/label breathing room ── */
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.metric-row:last-child {
+  border-bottom: none;
+}
+.metric-key {
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 10px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.metric-val {
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-primary, #F0F6FF);
+  letter-spacing: 0.02em;
+}
+
+/* ── Verdict label + value gap fix ── */
+.verdict-stat {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 8px;
+}
+.verdict-stat-label {
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.45;
+}
+.verdict-stat-value {
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 14px;
+  font-weight: 500;
+}

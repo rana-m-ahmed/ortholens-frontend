@@ -38,7 +38,7 @@ export default function DiagnosticCard({ result, originalImageUrl, durationMs, o
 				Analysis complete · {new Date().toLocaleTimeString()}
 			</div>
 			<Panel variant="default" padding="sm" style={{ borderLeft: `4px solid ${colors.text}` }}>
-				<div className="flex flex-wrap items-center gap-4" style={{ paddingLeft: 8 }}>
+				<div className="flex flex-wrap items-center gap-4" style={{ padding: '16px 20px', gap: 16 }}>
 					<div className="flex items-center gap-3">
 						<span style={{ color: colors.text }}>{verdictIcon}</span>
 						<h2 style={{ fontFamily: 'Space Grotesk, system-ui, sans-serif', fontSize: 20, fontWeight: 600, letterSpacing: '-0.01em', color: 'var(--color-text-primary)' }}>
@@ -60,34 +60,34 @@ export default function DiagnosticCard({ result, originalImageUrl, durationMs, o
 					</div>
 
 					<div className="ml-auto flex flex-col items-end gap-1">
-						<div className="flex items-center gap-2">
-							<span className="mono-label">CONFIDENCE</span>
-							<span className="mono-value">{formatConfidence(result.confidence)}</span>
+						<div className="verdict-stat">
+							<span className="verdict-stat-label">Confidence</span>
+							<span className="verdict-stat-value">{formatConfidence(result.confidence)}</span>
 						</div>
-						<div className="flex items-center gap-2">
-							<span className="mono-label">DURATION</span>
-							<span className="mono-value">{durationMs != null ? formatDuration(durationMs) : '—'}</span>
+						<div className="verdict-stat">
+							<span className="verdict-stat-label">Duration</span>
+							<span className="verdict-stat-value">{durationMs != null ? formatDuration(durationMs) : '—'}</span>
 						</div>
 					</div>
 				</div>
 			</Panel>
 
 			<div style={{ padding: '20px 0' }}>
-				<div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
-					<Panel variant="elevated" padding="md" style={{ minHeight: 180 }}>
+				<div className="metrics-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)', gap: 12, marginTop: 12 }}>
+					<Panel variant="elevated" padding="md" style={{ padding: 20, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
 						<div className="flex h-full items-center justify-center">
 							<ConfidenceGauge value={result.confidence} prediction={result.prediction} size={200} />
 						</div>
 					</Panel>
 
-					<Panel variant="elevated" padding="md" style={{ minHeight: 180 }}>
+					<Panel variant="elevated" padding="md" style={{ padding: 20, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
 						<div className="flex flex-col gap-4">
 							<div className="mono-label">CLASS PROBABILITIES</div>
 							<ProbabilityBars probabilities={result.probabilities} />
 						</div>
 					</Panel>
 
-					<Panel variant="elevated" padding="md" style={{ minHeight: 180 }}>
+					<Panel variant="elevated" padding="md" className="metadata-panel" style={{ padding: 20, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
 						<div className="flex flex-col gap-4">
 							<div className="mono-label">MODEL METADATA</div>
 							<div className="flex flex-col">
@@ -100,14 +100,10 @@ export default function DiagnosticCard({ result, originalImageUrl, durationMs, o
 								].map(([label, value], index, rows) => (
 									<div
 										key={label}
-										className="flex items-center justify-between gap-4"
-										style={{
-											padding: '6px 0',
-											borderBottom: index === rows.length - 1 ? 'none' : '1px solid var(--color-border-dim)',
-										}}
+										className="metric-row"
 									>
-										<span className="mono-label">{label}</span>
-										<span className="mono-value">{value}</span>
+										<span className="metric-key">{label}</span>
+										<span className="metric-val">{value}</span>
 									</div>
 								))}
 							</div>
@@ -120,11 +116,26 @@ export default function DiagnosticCard({ result, originalImageUrl, durationMs, o
 				<HeatmapViewer originalUrl={originalImageUrl} heatmapBase64={result.heatmap} />
 			</div>
 
-			<div className="flex flex-wrap items-center gap-3" style={{ paddingTop: 16, borderTop: '1px solid var(--color-border-dim)' }}>
-				<Button variant="outline" size="sm" leftIcon={<RotateCcw size={14} />} rightIcon={<RefreshCw size={14} />} onClick={onReset}>
+			<div style={{ display: 'flex', justifyContent: 'center', paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.07)', marginTop: 16 }}>
+				<Button variant="outline" size="sm" leftIcon={<RotateCcw size={14} />} rightIcon={<RefreshCw size={14} />} onClick={onReset} style={{ minWidth: 200 }}>
 					Analyse another X-ray
 				</Button>
 			</div>
+			<style jsx>{`
+				@media (max-width: 768px) {
+					.metrics-grid {
+						grid-template-columns: 1fr 1fr !important;
+					}
+					.metadata-panel {
+						grid-column: 1 / -1 !important;
+					}
+				}
+				@media (max-width: 480px) {
+					.metrics-grid {
+						grid-template-columns: 1fr !important;
+					}
+				}
+			`}</style>
 		</motion.div>
 	)
 }
