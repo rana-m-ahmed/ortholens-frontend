@@ -61,9 +61,25 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.04em;
-  color: var(--color-text-accent);
+  color: var(--color-accent);
 }
 /* Glow ring animation helper used on status dots */
 @keyframes status-ping {
   75%, 100% { transform: scale(1.8); opacity: 0; }
+}
+
+.animate-ping-slow {
+  animation: ping-slow 1.4s ease-in-out infinite;
+}
+
+@keyframes ping-slow {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
 }

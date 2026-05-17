@@ -148,6 +148,10 @@ export default function BackgroundCanvas() {
     }
   }, [])
 
+  if (typeof window === 'undefined') {
+    return null
+  }
+
   return (
     <canvas
       ref={canvasRef}

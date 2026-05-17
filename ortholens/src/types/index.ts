@@ -1,10 +1,3 @@
-// TODO: Prompt 2
-
-export type Prediction = {
-  fracture: number
-  normal: number
-  heatmapUrl?: string
-}
 // ── App state machine ──────────────────────────────────────────
 export type AppState = 'idle' | 'uploading' | 'analyzing' | 'result' | 'error'
 

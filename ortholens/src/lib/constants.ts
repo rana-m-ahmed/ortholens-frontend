@@ -1,6 +1,3 @@
-// TODO: Prompt 2
-
-export const API_ENDPOINT = '/api/predict'
 import type { ConfidenceLevel } from '@/types'
 
 export const BACKEND_BASE_URL  = 'https://rana-m-ahmed-ortholens-backend.hf.space'
