@@ -95,7 +95,7 @@ export default function Home() {
                           maxWidth: 480,
                         }}
                       >
-                        Upload an X-ray. A ResNet-50 model classifies bone fractures in under 2 seconds and generates a Grad-CAM heatmap highlighting the regions driving the prediction.
+                        Upload an X-ray. Our orthov1 model classifies bone fractures in under 2 seconds and generates a Grad-CAM heatmap highlighting the regions driving the prediction.
                       </p>
                     </motion.div>
                   )}

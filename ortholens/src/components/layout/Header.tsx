@@ -12,30 +12,66 @@ export default function Header() {
 
   useEffect(() => {
     let isMounted = true
+    let intervalId: number | undefined
 
     const checkHealth = async () => {
-      try {
-        const response = await fetch(HEALTH_URL, {
-          signal: AbortSignal.timeout(5000),
-          cache: 'no-store',
-        })
+      if (!isMounted) return
 
-        const payload = await response.json().catch(() => null)
+      if (typeof navigator !== 'undefined' && !navigator.onLine) {
+        if (isMounted) setStatus('offline')
+        return
+      }
+
+      try {
+        if (isMounted) setStatus('checking')
+
+        const controller = new AbortController()
+        const timeout = window.setTimeout(() => controller.abort(), 5000)
+
+        let response: Response
+        try {
+          response = await fetch(HEALTH_URL, {
+            signal: controller.signal,
+            cache: 'no-store',
+          })
+        } finally {
+          clearTimeout(timeout)
+        }
+
+        let payload: any = null
+        try {
+          payload = await response.json()
+        } catch {
+          payload = null
+        }
+
         const isOk = response.ok && payload?.status === 'ok'
-        if (isMounted) {
-          setStatus(isOk ? 'online' : 'offline')
-        }
+        if (isMounted) setStatus(isOk ? 'online' : 'offline')
       } catch {
-        if (isMounted) {
-          setStatus('offline')
-        }
+        if (isMounted) setStatus('offline')
       }
     }
 
+    // Initial check and periodic polling
     checkHealth()
+    intervalId = window.setInterval(checkHealth, 30000)
+
+    const handleOnline = () => {
+      checkHealth()
+    }
+
+    const handleOffline = () => {
+      if (isMounted) setStatus('offline')
+    }
+
+    window.addEventListener('online', handleOnline)
+    window.addEventListener('offline', handleOffline)
 
     return () => {
       isMounted = false
+      if (intervalId) clearInterval(intervalId)
+      window.removeEventListener('online', handleOnline)
+      window.removeEventListener('offline', handleOffline)
     }
   }, [])
 
