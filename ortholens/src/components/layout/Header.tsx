@@ -12,7 +12,6 @@ export default function Header() {
 
   useEffect(() => {
     let isMounted = true
-    let intervalId: number | undefined
 
     const checkHealth = async () => {
       if (!isMounted) return
@@ -38,14 +37,19 @@ export default function Header() {
           clearTimeout(timeout)
         }
 
-        let payload: any = null
+        let payload: unknown = null
         try {
           payload = await response.json()
         } catch {
           payload = null
         }
 
-        const isOk = response.ok && payload?.status === 'ok'
+        const statusVal =
+          typeof payload === 'object' && payload !== null && 'status' in payload
+            ? (payload as Record<string, unknown>).status
+            : undefined
+
+        const isOk = response.ok && statusVal === 'ok'
         if (isMounted) setStatus(isOk ? 'online' : 'offline')
       } catch {
         if (isMounted) setStatus('offline')
@@ -54,7 +58,7 @@ export default function Header() {
 
     // Initial check and periodic polling
     checkHealth()
-    intervalId = window.setInterval(checkHealth, 30000)
+    const intervalId = window.setInterval(checkHealth, 30000)
 
     const handleOnline = () => {
       checkHealth()

@@ -13,6 +13,7 @@ type Props = {
   onClick?: () => void
   type?: 'button' | 'submit'
   className?: string
+  style?: React.CSSProperties
   children: React.ReactNode
 }
 

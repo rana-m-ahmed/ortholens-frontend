@@ -97,7 +97,7 @@ export default function DiagnosticCard({ result, originalImageUrl, durationMs, o
 									['CLAHE', 'Enabled'],
 									['HEATMAP', 'Grad-CAM'],
 									['DURATION', durationMs != null ? formatDuration(durationMs) : 'N/A'],
-								].map(([label, value], index, rows) => (
+								].map(([label, value]) => (
 									<div
 										key={label}
 										className="metric-row"
