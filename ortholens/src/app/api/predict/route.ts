@@ -70,7 +70,7 @@ export async function POST(request: Request): Promise<Response> {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` },
       body: forward,
-      signal: AbortSignal.timeout(30_000),
+      signal: AbortSignal.timeout(50_000),
     })
 
     if (!resp.ok) {
