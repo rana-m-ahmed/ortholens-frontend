@@ -92,7 +92,7 @@ export default function DiagnosticCard({ result, originalImageUrl, durationMs, o
 							<div className="mono-label">MODEL METADATA</div>
 							<div className="flex flex-col">
 								{[
-									['MODEL', 'ResNet-50'],
+									['MODEL', 'DenseNet-121'],
 									['INPUT', '512 × 512 px'],
 									['CLAHE', 'Enabled'],
 									['HEATMAP', 'Grad-CAM'],
