@@ -46,7 +46,8 @@ export default function ScanAnimation({ imageUrl, isVisible }: Props) {
           style={{
             position: 'absolute',
             inset: 0,
-            borderRadius: 16,
+            borderRadius: 'inherit',
+            zIndex: 10,
             overflow: 'hidden',
             background: 'rgba(6,11,20,0.88)',
             backdropFilter: 'blur(6px)',
@@ -179,8 +180,9 @@ export default function ScanAnimation({ imageUrl, isVisible }: Props) {
                 alignItems: 'center',
                 gap: 2,
                 color: 'var(--color-accent)',
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: 18,
+                fontFamily: 'IBM Plex Mono, monospace',
+                fontSize: 12,
+                letterSpacing: '0.06em',
               }}
               aria-hidden="true"
             >

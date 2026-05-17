@@ -46,7 +46,7 @@ export default function Badge({ label, variant, size = 'sm', className }: Props)
     <span
       className={cn('inline-flex items-center', className)}
       style={{
-        fontFamily: 'JetBrains Mono, monospace',
+        fontFamily: 'IBM Plex Mono, monospace',
         letterSpacing: '0.08em',
         textTransform: 'uppercase',
         borderRadius: 4,

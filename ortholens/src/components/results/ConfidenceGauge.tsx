@@ -48,8 +48,8 @@ export default function ConfidenceGauge({ value, prediction, size = 200 }: Props
 
       <svg
         width={size}
-        height={size + 24}
-        viewBox={`0 0 ${size} ${size + 24}`}
+        height={size * 0.65}
+        viewBox={`0 0 ${size} ${size * 0.65}`}
         role="img"
         aria-label={`Confidence: ${formatConfidence(safeValue)}, prediction: ${prediction}`}
       >
@@ -88,7 +88,7 @@ export default function ConfidenceGauge({ value, prediction, size = 200 }: Props
           y={cy - 8}
           textAnchor="middle"
           fill="var(--color-text-primary)"
-          style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 34 }}
+          style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 34 }}
         >
           {countUp.toFixed(1)}
           <tspan style={{ fontSize: 16 }} dy="-10">
@@ -101,7 +101,7 @@ export default function ConfidenceGauge({ value, prediction, size = 200 }: Props
           y={cy + 18}
           textAnchor="middle"
           fill="var(--color-text-muted)"
-          style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12 }}
+          style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 11 }}
         >
           confidence
         </text>

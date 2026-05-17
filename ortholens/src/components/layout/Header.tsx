@@ -76,7 +76,8 @@ export default function Header() {
                 fontSize: 16,
                 fontWeight: 600,
                 color: 'var(--color-text-primary)',
-                fontFamily: 'Inter, system-ui, sans-serif',
+                fontFamily: 'Space Grotesk, system-ui, sans-serif',
+                letterSpacing: '-0.01em',
                 lineHeight: 1,
               }}
             >

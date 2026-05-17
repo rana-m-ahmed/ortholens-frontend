@@ -16,7 +16,7 @@ export default function NotFound() {
             border: '1px solid var(--color-border-soft)',
             background: 'transparent',
             color: 'var(--color-accent)',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'IBM Plex Mono, monospace',
             letterSpacing: '0.04em',
             textDecoration: 'none',
           }}

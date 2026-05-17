@@ -65,7 +65,7 @@ export default function DropZone({ onFileSelect, disabled = false, preview = nul
               padding="none"
               className="flex flex-col items-center justify-center gap-4"
               style={{
-                minHeight: 280,
+                minHeight: 260,
                 borderRadius: 16,
                 border: isDragging
                   ? '2px solid var(--color-accent)'
@@ -79,10 +79,12 @@ export default function DropZone({ onFileSelect, disabled = false, preview = nul
                 className={cn(isDragging ? 'animate-pulse-glow' : undefined)}
                 style={{ color: isDragging ? 'var(--color-accent)' : 'var(--color-text-muted)' }}
               />
-              <h3 style={{ fontSize: 20, color: 'var(--color-text-primary)', fontWeight: 500 }}>
+              <h3 style={{ fontFamily: 'Space Grotesk, system-ui, sans-serif', fontSize: 18, color: 'var(--color-text-primary)', fontWeight: 500 }}>
                 Drop your X-ray here
               </h3>
-              <p className="mono-label">JPEG · PNG · WebP · Max {MAX_FILE_SIZE_MB} MB</p>
+              <p className="mono-label" style={{ fontSize: 11, letterSpacing: '0.08em' }}>
+                JPEG · PNG · WebP · Max {MAX_FILE_SIZE_MB} MB
+              </p>
               <Button
                 variant="outline"
                 onClick={() => {
@@ -104,7 +106,7 @@ export default function DropZone({ onFileSelect, disabled = false, preview = nul
                 }}
               >
                 <AlertCircle size={16} style={{ color: 'var(--color-fracture)' }} />
-                <span style={{ fontSize: 13 }}>{localError}</span>
+                  <span style={{ fontFamily: 'DM Sans, system-ui, sans-serif', fontSize: 13, lineHeight: 1.6 }}>{localError}</span>
               </div>
             ) : null}
           </motion.div>
@@ -115,7 +117,7 @@ export default function DropZone({ onFileSelect, disabled = false, preview = nul
               padding="none"
               className="overflow-hidden"
               style={{
-                minHeight: 280,
+                minHeight: 260,
                 borderRadius: 16,
                 border: '1px solid var(--color-border-soft)',
                 opacity: disabled ? 0.4 : 1,
@@ -147,7 +149,7 @@ export default function DropZone({ onFileSelect, disabled = false, preview = nul
               >
                 <div className="flex items-center gap-2" style={{ fontSize: 13 }}>
                   <FileImage size={14} />
-                  <span className="mono-label" style={{ fontSize: 13 }}>
+                  <span className="mono-label" style={{ fontSize: 12, letterSpacing: '0.06em' }}>
                     {preview?.name ?? 'No file selected'} · {formatFileSize((preview?.sizeKb ?? 0) * 1024)}
                   </span>
                 </div>

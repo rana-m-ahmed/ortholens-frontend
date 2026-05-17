@@ -47,8 +47,10 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
+        sans: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-ibm-plex-mono)', 'monospace'],
+        display: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
       },
       animation: {
         'scan-beam':   'scan-beam 2.4s linear infinite',

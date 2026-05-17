@@ -34,11 +34,14 @@ export default function DiagnosticCard({ result, originalImageUrl, durationMs, o
 			transition={{ duration: 0.45, ease: 'easeOut' }}
 			className={cn('flex flex-col gap-4')}
 		>
+			<div className="mono-label" style={{ marginBottom: 14, color: 'var(--color-text-muted)' }}>
+				Analysis complete · {new Date().toLocaleTimeString()}
+			</div>
 			<Panel variant="default" padding="sm" style={{ borderLeft: `4px solid ${colors.text}` }}>
-				<div className="flex flex-wrap items-center gap-4">
+				<div className="flex flex-wrap items-center gap-4" style={{ paddingLeft: 8 }}>
 					<div className="flex items-center gap-3">
 						<span style={{ color: colors.text }}>{verdictIcon}</span>
-						<h2 style={{ fontSize: 18, fontWeight: 600, color: 'var(--color-text-primary)' }}>
+						<h2 style={{ fontFamily: 'Space Grotesk, system-ui, sans-serif', fontSize: 20, fontWeight: 600, letterSpacing: '-0.01em', color: 'var(--color-text-primary)' }}>
 							{PREDICTION_LABELS[result.prediction]}
 						</h2>
 					</div>
@@ -70,21 +73,21 @@ export default function DiagnosticCard({ result, originalImageUrl, durationMs, o
 			</Panel>
 
 			<div style={{ padding: '20px 0' }}>
-				<div className="grid gap-4 lg:grid-cols-[1fr_1.2fr_1fr]">
-					<Panel variant="elevated" padding="md">
+				<div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
+					<Panel variant="elevated" padding="md" style={{ minHeight: 180 }}>
 						<div className="flex h-full items-center justify-center">
-							<ConfidenceGauge value={result.confidence} prediction={result.prediction} size={180} />
+							<ConfidenceGauge value={result.confidence} prediction={result.prediction} size={200} />
 						</div>
 					</Panel>
 
-					<Panel variant="elevated" padding="md">
+					<Panel variant="elevated" padding="md" style={{ minHeight: 180 }}>
 						<div className="flex flex-col gap-4">
 							<div className="mono-label">CLASS PROBABILITIES</div>
 							<ProbabilityBars probabilities={result.probabilities} />
 						</div>
 					</Panel>
 
-					<Panel variant="elevated" padding="md">
+					<Panel variant="elevated" padding="md" style={{ minHeight: 180 }}>
 						<div className="flex flex-col gap-4">
 							<div className="mono-label">MODEL METADATA</div>
 							<div className="flex flex-col">
@@ -118,7 +121,7 @@ export default function DiagnosticCard({ result, originalImageUrl, durationMs, o
 			</div>
 
 			<div className="flex flex-wrap items-center gap-3" style={{ paddingTop: 16, borderTop: '1px solid var(--color-border-dim)' }}>
-				<Button variant="outline" leftIcon={<RotateCcw size={14} />} rightIcon={<RefreshCw size={14} />} onClick={onReset}>
+				<Button variant="outline" size="sm" leftIcon={<RotateCcw size={14} />} rightIcon={<RefreshCw size={14} />} onClick={onReset}>
 					Analyse another X-ray
 				</Button>
 			</div>

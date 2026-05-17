@@ -32,7 +32,7 @@ function ViewerHeader({ mode, onModeChange }: { mode: Mode; onModeChange: (nextM
           type="button"
           onClick={() => onModeChange('sidebyside')}
           className={cn(
-            'relative z-10 flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2 text-[13px] font-medium transition-colors',
+            'relative z-10 flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2 text-[13px] font-medium transition-colors font-mono',
             'bg-transparent border border-transparent',
             mode === 'sidebyside' ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)]'
           )}
@@ -45,7 +45,7 @@ function ViewerHeader({ mode, onModeChange }: { mode: Mode; onModeChange: (nextM
           type="button"
           onClick={() => onModeChange('blend')}
           className={cn(
-            'relative z-10 flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2 text-[13px] font-medium transition-colors',
+            'relative z-10 flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2 text-[13px] font-medium transition-colors font-mono',
             'bg-transparent border border-transparent',
             mode === 'blend' ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-secondary)]'
           )}
@@ -72,7 +72,7 @@ function PanelShell({ title, badgeLabel, children }: { title: string; badgeLabel
 
 function ImageFrame({ src, alt, maxHeight, overlay = false }: { src: string; alt: string; maxHeight: number; overlay?: boolean }) {
   return (
-    <div className="relative overflow-hidden" style={{ maxHeight }}>
+    <div className="relative flex min-h-[180px] items-center justify-center overflow-hidden bg-[var(--color-bg-base)]" style={{ maxHeight }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}

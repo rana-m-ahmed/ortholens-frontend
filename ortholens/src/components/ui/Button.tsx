@@ -32,8 +32,8 @@ export default function Button({
 
   const baseStyle: React.CSSProperties = {
     borderRadius: 8,
-    fontFamily: 'JetBrains Mono, monospace',
-    letterSpacing: '0.04em',
+    fontFamily: 'Space Grotesk, system-ui, sans-serif',
+    letterSpacing: '0.02em',
     display: 'inline-flex',
     alignItems: 'center',
     gap: 8,

@@ -1,8 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  color-scheme: dark;
+  background: var(--color-bg-base);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top, rgba(0,229,255,0.08), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255,56,96,0.06), transparent 28%),
+    var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 :root {
   --color-bg-base:     #060B14;
@@ -21,6 +44,9 @@
   --color-text-primary:  #F0F6FF;
   --color-text-secondary:rgba(176,196,222,0.70);
   --color-text-muted:    rgba(176,196,222,0.40);
+  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), monospace;
 }
 
 /* Reusable utility classes — reference these by name in all components */
@@ -51,17 +77,17 @@
 }
 /* Monospace label style used for metadata rows */
 .mono-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--color-text-muted);
 }
 .mono-value {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.04em;
-  color: var(--color-accent);
+  color: var(--color-text-primary);
 }
 /* Glow ring animation helper used on status dots */
 @keyframes status-ping {

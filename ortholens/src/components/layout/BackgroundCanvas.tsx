@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 type Particle = {
   x: number
@@ -13,6 +13,17 @@ type Particle = {
 
 export default function BackgroundCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    const frameId = window.requestAnimationFrame(() => {
+      setMounted(true)
+    })
+
+    return () => {
+      window.cancelAnimationFrame(frameId)
+    }
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -148,7 +159,7 @@ export default function BackgroundCanvas() {
     }
   }, [])
 
-  if (typeof window === 'undefined') {
+  if (!mounted) {
     return null
   }
 

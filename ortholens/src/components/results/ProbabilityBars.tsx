@@ -58,7 +58,7 @@ function ProbabilityRow({ cls, probability, isHigher }: RowProps) {
         style={{
           width: 46,
           textAlign: 'right',
-          fontFamily: 'JetBrains Mono, monospace',
+          fontFamily: 'IBM Plex Mono, monospace',
           fontSize: 13,
           color: colors.text,
         }}
