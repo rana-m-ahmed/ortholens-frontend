@@ -6,7 +6,7 @@ export async function GET(): Promise<Response> {
     // Many backends (e.g. Hugging Face Spaces) don't expose a /health route.
     // Probe the `/predict` endpoint with GET — if the backend responds (even 405),
     // it's reachable. If the fetch throws, treat it as unreachable.
-    const resp = await fetch(`${BACKEND_BASE_URL}/health`, {
+    const resp = await fetch(`${BACKEND_BASE_URL}/predict`, {
       method: 'GET',
       cache: 'no-store',
       signal: AbortSignal.timeout(8000),
